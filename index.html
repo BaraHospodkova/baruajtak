@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>psí věštírna</title>
+  <style>
+    :root {
+      --bg: #120a2b;
+      --card: #221742;
+      --text: #f7e8ff;
+      --accent: #c28bff;
+      --accent-2: #77d4ff;
+      --shadow: rgba(16, 10, 48, 0.36);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at top left, #392271 0%, #120a2b 45%, #09030e 100%),
+        radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px);
+      background-size: 100% 100%, 18px 18px;
+      color: var(--text);
+      padding: 1.5rem;
+    }
+
+    .fortune-app {
+      width: min(560px, 100%);
+      background: var(--card);
+      border: 1px solid rgba(159, 132, 202, 0.18);
+      border-radius: 24px;
+      box-shadow: 0 24px 70px var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero {
+      position: relative;
+      padding: 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(137, 68, 205, 0.28), rgba(54, 13, 78, 0.72));
+      border-bottom: 1px solid rgba(180, 154, 222, 0.22);
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(30px);
+      opacity: 0.55;
+    }
+
+    .hero::before {
+      width: 180px;
+      height: 180px;
+      top: -50px;
+      right: -40px;
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .hero::after {
+      width: 240px;
+      height: 240px;
+      bottom: -90px;
+      left: -70px;
+      background: rgba(120, 88, 235, 0.24);
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero .dog-icon {
+      width: 220px;
+      height: 220px;
+      margin: 0 auto 1rem;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero p {
+      color: rgba(247, 232, 255, 0.92);
+      font-size: 1rem;
+      line-height: 1.6;
+      max-width: 38rem;
+      margin: 0 auto;
+    }
+
+    .content {
+      padding: 2rem;
+    }
+
+    .output {
+      min-height: 140px;
+      padding: 1.6rem;
+      margin-bottom: 1.8rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      line-height: 1.7;
+      font-size: 1.1rem;
+      transition: transform 0.25s ease;
+    }
+
+    .output.shine {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(40, 111, 255, 0.16);
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: center;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 0.95rem 1.8rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 16px 30px rgba(159, 91, 233, 0.22);
+      color: #1f1341;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    button:hover,
+    button:focus-visible {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+      outline: none;
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .footer {
+      margin-top: 1.5rem;
+      text-align: center;
+      color: #98a3c0;
+      font-size: 0.92rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="fortune-app">
+    <section class="hero">
+      <div class="dog-icon">🐶</div>
+      <h1>psí věštírna</h1>
+      <p>Stiskni tlačítko a nech pejska, ať ti řekne věštbu. Je to hravé, přátelské a plné psích rad.</p>
+    </section>
+
+    <section class="content">
+      <div id="fortuneOutput" class="output">Zmáčkni tlačítko a pejsek ti práskne svou věštbu.</div>
+      <div class="button-row">
+        <button id="fortuneButton" type="button">Získej psí věštbu</button>
+      </div>
+      <div class="footer">Psí věštírna pro dobrý den a úsměv. Všechno bez pamlsků, jen zábava.</div>
+    </section>
+  </main>
+
+  <script>
+    const fortunes = [
+      "Všechno běží hladce, ale je čas udělat zálohu. Nikdy nevíš, kdy se mrtvý server probudí.",
+      "Automatická věštba: Udrž si duši v klidu a logy připravené. Debug už jde po tobě.",
+      "Ať už je to pět minut nebo pět hodin, nový deploy je téměř hotový. Ať se server nezadusí.",
+      "Tvoje konfigurace se rozmnoží v ideálním stavu — jen nezapomeň na .env soubor.",
+      "Čeká tě noc plná commitů. Nech si energii a nepřepínej build v poslední minutě.",
+      "Síť ti naservíruje odpověď, když budeš trpělivý. Mezitím vyčisti cache a kafe dopij do dna.",
+      "Tvoje přání jsou v pelíšku a čekají na správný okamžik. Dneska mír, zítra dobrou procházku.",
+      "V budoucnu ti udělá radost nový pamlsek. Teď se drž a naslouchej štěkotu klidu.",
+      "Pravděpodobnost radosti roste s dobrou náladou. Jeden pohled, jeden drb, jeden krok vpřed.",
+      "Největší věštba: spokojený den s ocasem ve vzduchu. Ale možná tě dneska čeká i drobný psí dobrodružství."
+    ];
+
+    const outputEl = document.getElementById("fortuneOutput");
+    const buttonEl = document.getElementById("fortuneButton");
+
+    function getFortune() {
+      const index = Math.floor(Math.random() * fortunes.length);
+      return fortunes[index];
+    }
+
+    buttonEl.addEventListener("click", () => {
+      outputEl.textContent = getFortune();
+      outputEl.classList.add("shine");
+      setTimeout(() => outputEl.classList.remove("shine"), 400);
+    });
+  </script>
+</body>
+</html>
