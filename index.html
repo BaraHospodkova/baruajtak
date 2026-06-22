@@ -83,9 +83,9 @@
     }
 
     .hero .dog-icon {
-      width: 220px;
-      height: 220px;
-      margin: 0 auto 1rem;
+      width: 280px;
+      height: 260px;
+      margin: 0 auto 1.5rem;
       display: block;
       position: relative;
       z-index: 1;
@@ -168,7 +168,44 @@
 <body>
   <main class="fortune-app">
     <section class="hero">
-      <div class="dog-icon">🐶</div>
+      <div class="dog-icon">
+        <svg viewBox="0 0 320 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Roztomilý pes">
+          <defs>
+            <linearGradient id="furGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f7d6c7" />
+              <stop offset="100%" stop-color="#d49c78" />
+            </linearGradient>
+            <linearGradient id="earGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#a66b4b" />
+              <stop offset="100%" stop-color="#593720" />
+            </linearGradient>
+            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#000000" flood-opacity="0.22" />
+            </filter>
+          </defs>
+
+          <g filter="url(#shadow)">
+            <ellipse cx="165" cy="244" rx="105" ry="32" fill="rgba(255,255,255,0.08)" />
+            <path d="M65 180 C40 130, 48 90, 105 84 C135 78, 166 82, 190 105 C215 90, 250 92, 255 142 C280 160, 280 190, 240 198 C225 220, 204 228, 170 228 C140 235, 110 226, 85 205 C60 190, 60 190, 65 180 Z" fill="url(#furGradient)" />
+            <path d="M62 170 C44 155, 32 132, 40 110 C48 90, 70 78, 96 84 C88 115, 90 150, 62 170 Z" fill="url(#earGradient)" />
+            <path d="M255 142 C270 118, 290 113, 292 135 C295 160, 278 180, 255 170 C255 170, 255 170, 255 142 Z" fill="url(#earGradient)" />
+            <path d="M84 154 C90 128, 116 98, 155 96 C194 94, 220 122, 226 150 C224 172, 205 182, 185 186 C170 188, 155 190, 140 186 C120 180, 104 172, 84 154 Z" fill="#fff2e4" />
+            <path d="M98 148 C108 142, 126 130, 155 130 C186 130, 204 144, 214 152 C216 132, 214 118, 195 106 C168 88, 126 92, 102 118 C96 128, 96 140, 98 148 Z" fill="#f1c9ac" />
+            <circle cx="123" cy="160" r="12" fill="#2b1618" />
+            <circle cx="196" cy="160" r="12" fill="#2b1618" />
+            <circle cx="121" cy="158" r="6" fill="#fff" opacity="0.75" />
+            <circle cx="194" cy="158" r="6" fill="#fff" opacity="0.75" />
+            <path d="M120 193 C135 202, 178 202, 190 192" stroke="#593720" stroke-width="8" fill="none" stroke-linecap="round" />
+            <path d="M135 216 C145 226, 175 226, 185 216" stroke="#8b5b42" stroke-width="10" fill="none" stroke-linecap="round" />
+            <path d="M112 181 C108 196, 110 212, 122 222 C130 230, 142 232, 154 228" stroke="#8b5b42" stroke-width="10" fill="none" stroke-linecap="round" />
+            <path d="M188 182 C192 198, 190 214, 178 224 C170 230, 158 232, 146 228" stroke="#8b5b42" stroke-width="10" fill="none" stroke-linecap="round" />
+            <path d="M130 84 C126 54, 152 38, 184 42 C218 46, 246 70, 250 102 C254 134, 226 160, 192 162 C170 163, 150 156, 128 138" fill="#f7d6c7" />
+            <path d="M126 86 C120 60, 142 44, 170 46 C198 48, 234 76, 238 102 C242 129, 212 156, 190 156 C166 156, 150 148, 128 132" fill="rgba(203, 148, 107, 0.18)" />
+            <path d="M158 148 C156 138, 152 128, 146 120 C132 104, 108 98, 95 110" stroke="#5a3621" stroke-width="6" fill="none" stroke-linecap="round" />
+            <path d="M190 146 C192 136, 196 126, 202 118 C216 102, 240 96, 253 108" stroke="#5a3621" stroke-width="6" fill="none" stroke-linecap="round" />
+          </g>
+        </svg>
+      </div>
       <h1>psí věštírna</h1>
       <p>Stiskni tlačítko a nech pejska, ať ti řekne věštbu. Je to hravé, přátelské a plné psích rad.</p>
     </section>
